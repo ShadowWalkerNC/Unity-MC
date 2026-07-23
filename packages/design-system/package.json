@@ -1,0 +1,7 @@
+{
+  "name": "@unity-mc/design-system",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.css",
+  "description": "Shared styling tokens, variables, and components for Unity-MC"
+}

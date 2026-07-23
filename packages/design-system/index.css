@@ -1,0 +1,17 @@
+/* Unity-MC Shared Light Theme Tokens */
+
+:root {
+  --background-hsl: 210, 20%, 95%;
+  --surface-hsl: 0, 0%, 100%;
+  --foreground-hsl: 224, 25%, 12%;
+  --muted-hsl: 220, 10%, 45%;
+  --primary-hsl: 263, 70%, 45%;
+  --accent-hsl: 190, 90%, 40%;
+  
+  --background: hsl(var(--background-hsl));
+  --surface: hsl(var(--surface-hsl));
+  --primary: hsl(var(--primary-hsl));
+  --accent: hsl(var(--accent-hsl));
+  --foreground: hsl(var(--foreground-hsl));
+  --muted: hsl(var(--muted-hsl));
+}

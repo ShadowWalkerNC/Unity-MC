@@ -1,0 +1,10 @@
+{
+  "name": "@unity-mc/testing-suite",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test:all": "echo 'Run tests across all workspaces'"
+  },
+  "description": "Shared testing configurations and linting pipelines for Unity-MC"
+}
