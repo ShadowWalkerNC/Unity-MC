@@ -1,12 +1,12 @@
-/* Custom premium global styles based on DESIGN.md HSL tokens */
+/* Custom premium light global styles based on DESIGN.md HSL tokens */
 
 :root {
-  --background-hsl: 224, 25%, 12%;
-  --surface-hsl: 224, 25%, 16%;
-  --primary-hsl: 263, 70%, 50%;
-  --accent-hsl: 190, 90%, 50%;
-  --foreground-hsl: 210, 40%, 98%;
-  --muted-hsl: 215, 20%, 65%;
+  --background-hsl: 210, 20%, 95%;
+  --surface-hsl: 0, 0%, 100%;
+  --foreground-hsl: 224, 25%, 12%;
+  --muted-hsl: 220, 10%, 45%;
+  --primary-hsl: 263, 70%, 45%;
+  --accent-hsl: 190, 90%, 40%;
   
   --background: hsl(var(--background-hsl));
   --surface: hsl(var(--surface-hsl));
@@ -38,18 +38,18 @@ a {
 
 /* Glassmorphism Panel */
 .glass-panel {
-  background: rgba(25, 30, 45, 0.65);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
@@ -68,12 +68,12 @@ a {
   background: linear-gradient(45deg, var(--primary), var(--accent));
   border-radius: 13px;
   z-index: -1;
-  opacity: 0.15;
+  opacity: 0.1;
   transition: opacity 0.3s ease;
 }
 
 .glowing-card:hover::before {
-  opacity: 0.4;
+  opacity: 0.25;
 }
 
 /* Typography styles */
@@ -84,7 +84,7 @@ h1, h2, h3, h4 {
 }
 
 .title-gradient {
-  background: linear-gradient(135deg, #fff 0%, hsl(var(--muted-hsl)) 100%);
+  background: linear-gradient(135deg, #111 0%, hsl(var(--muted-hsl)) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -109,24 +109,24 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), hsl(263, 70%, 45%));
+  background: linear-gradient(135deg, var(--primary), hsl(263, 70%, 40%));
   color: #fff;
-  box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px 0 rgba(124, 58, 237, 0.4);
+  box-shadow: 0 6px 20px 0 rgba(124, 58, 237, 0.3);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   color: var(--foreground);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 /* Badge styles */
@@ -142,25 +142,25 @@ h1, h2, h3, h4 {
 }
 
 .badge-active {
-  background: rgba(16, 185, 129, 0.15);
-  color: rgb(52, 211, 153);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.12);
+  color: rgb(5, 150, 105);
+  border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
 .badge-archived {
-  background: rgba(156, 163, 175, 0.15);
-  color: rgb(209, 213, 219);
-  border: 1px solid rgba(156, 163, 175, 0.3);
+  background: rgba(107, 114, 128, 0.12);
+  color: rgb(75, 85, 99);
+  border: 1px solid rgba(107, 114, 128, 0.25);
 }
 
 .badge-private {
-  background: rgba(245, 158, 11, 0.15);
-  color: rgb(251, 191, 36);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(217, 119, 6, 0.12);
+  color: rgb(180, 83, 9);
+  border: 1px solid rgba(217, 119, 6, 0.25);
 }
 
 .nav-link {
-  opacity: 0.85;
+  opacity: 0.8;
   transition: opacity 0.2s;
 }
 
