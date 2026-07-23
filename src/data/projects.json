@@ -1,0 +1,227 @@
+[
+  {
+    "id": "culinaryos",
+    "name": "CulinaryOS",
+    "group": "🍽️ Culinary",
+    "status": "Active",
+    "techStack": "Next.js (App Router), TypeScript, Vanilla CSS, Supabase",
+    "deployUrl": "https://culinaryos.shadowwalker.dev",
+    "description": "Central culinary operating platform.",
+    "knownIssues": [
+      "Initial database schemas need integration."
+    ],
+    "roadmap": [
+      "Connect with Plated for plating displays.",
+      "Setup CulinaryOps background cron tasks."
+    ],
+    "mcpServers": ["mcp-culinary-server"]
+  },
+  {
+    "id": "plated",
+    "name": "Plated",
+    "group": "🍽️ Culinary",
+    "status": "Active",
+    "techStack": "Next.js, React, Tailwind CSS / Canvas, Supabase",
+    "deployUrl": "https://plated.shadowwalker.dev",
+    "description": "Menu and plating management.",
+    "knownIssues": [
+      "Requires canvas optimization for complex layouts."
+    ],
+    "roadmap": [
+      "Image generator integration for AI menu mockups."
+    ],
+    "mcpServers": ["mcp-culinary-server"]
+  },
+  {
+    "id": "kitchenkit",
+    "name": "KitchenKit",
+    "group": "🍽️ Culinary",
+    "status": "Active",
+    "techStack": "Next.js, Web workers (timers), local storage fallback, Supabase",
+    "deployUrl": "https://kitchenkit.shadowwalker.dev",
+    "description": "Kitchen utility suite and tools.",
+    "knownIssues": [
+      "Timer audios require user-gesture permission updates."
+    ],
+    "roadmap": [
+      "Native offline-first PWA caching support."
+    ],
+    "mcpServers": ["mcp-culinary-server"]
+  },
+  {
+    "id": "culinaryops",
+    "name": "CulinaryOps",
+    "group": "🍽️ Culinary",
+    "status": "Active (private)",
+    "techStack": "Node.js, TypeScript, Railway",
+    "deployUrl": "",
+    "description": "Backend operations & automation for culinary workflows.",
+    "knownIssues": [
+      "Secure credential rotation pending setup."
+    ],
+    "roadmap": [
+      "Automate vendor price scraping."
+    ],
+    "mcpServers": ["mcp-culinary-server", "mcp-mercury-bridge"]
+  },
+  {
+    "id": "post-pilot",
+    "name": "Post-Pilot",
+    "group": "🍽️ Culinary",
+    "status": "Active",
+    "techStack": "Next.js, Google Business API, Meta API, Supabase",
+    "deployUrl": "https://postpilot.shadowwalker.dev",
+    "description": "Marketing, posting, and scheduling for culinary businesses.",
+    "knownIssues": [
+      "OAuth Token renewal scopes need validation."
+    ],
+    "roadmap": [
+      "Automated review generation with LLMs."
+    ],
+    "mcpServers": ["mcp-culinary-server"]
+  },
+  {
+    "id": "mercury",
+    "name": "Mercury",
+    "group": "💬 Platform",
+    "status": "Active",
+    "techStack": "Node.js, WebSockets, Redis, Railway",
+    "deployUrl": "https://mercury.shadowwalker.dev",
+    "description": "Message routing and communication bus.",
+    "knownIssues": [
+      "Message retention configuration."
+    ],
+    "roadmap": [
+      "Integrate fallback email/SMS notifications."
+    ],
+    "mcpServers": ["mcp-mercury-bridge"]
+  },
+  {
+    "id": "shorelineops",
+    "name": "ShorelineOps",
+    "group": "🏥 Care",
+    "status": "Active",
+    "techStack": "React, TypeScript, Node.js, Render",
+    "deployUrl": "https://shoreline.shadowwalker.dev",
+    "description": "Clinical care operations, schedule planning.",
+    "knownIssues": [
+      "Offline sync resolution required for portable tablets."
+    ],
+    "roadmap": [
+      "Integrate schedule optimizer using medical staffing rules."
+    ],
+    "mcpServers": []
+  },
+  {
+    "id": "emergency-cad",
+    "name": "Emergency-CAD",
+    "group": "🚑 Safety",
+    "status": "Active",
+    "techStack": "Next.js (App Router), Supabase (Isolated DB), Vanilla CSS",
+    "deployUrl": "https://cad.shadowwalker.dev",
+    "description": "Computer-Aided Dispatch system.",
+    "knownIssues": [
+      "Live dispatch map markers rendering optimization."
+    ],
+    "roadmap": [
+      "Implement websocket CAD updates via Mercury."
+    ],
+    "mcpServers": ["mcp-emergency-cad"]
+  },
+  {
+    "id": "bibledesk",
+    "name": "BibleDesk",
+    "group": "✝️ Faith",
+    "status": "Active",
+    "techStack": "React, Electron / SQLite (Offline), CSS Modules",
+    "deployUrl": "",
+    "description": "Desktop scripture study workspace.",
+    "knownIssues": [
+      "Indexing large scripture files on startup."
+    ],
+    "roadmap": [
+      "Export system for annotation files."
+    ],
+    "mcpServers": []
+  },
+  {
+    "id": "prayer-atlas",
+    "name": "prayer-atlas",
+    "group": "✝️ Faith",
+    "status": "Active",
+    "techStack": "Next.js, Mapbox API, Supabase",
+    "deployUrl": "https://prayeratlas.shadowwalker.dev",
+    "description": "Mapping and requests database for prayers globally.",
+    "knownIssues": [
+      "Map marker performance clustering logic."
+    ],
+    "roadmap": [
+      "Add offline bookmarking sync capabilities."
+    ],
+    "mcpServers": []
+  },
+  {
+    "id": "portfolio",
+    "name": "portfolio",
+    "group": "👤 Personal",
+    "status": "Active",
+    "techStack": "Next.js Static Export / HTML/CSS",
+    "deployUrl": "https://shadowwalker.dev",
+    "description": "Personal portfolio website.",
+    "knownIssues": [
+      "Requires automated project list pulling from GitHub API."
+    ],
+    "roadmap": [
+      "Live preview integrations of other apps."
+    ],
+    "mcpServers": []
+  },
+  {
+    "id": "shadowwalkernc",
+    "name": "ShadowWalkerNC",
+    "group": "👤 Personal",
+    "status": "Active",
+    "techStack": "Markdown",
+    "deployUrl": "https://github.com/ShadowWalkerNC",
+    "description": "Profile README.",
+    "knownIssues": [],
+    "roadmap": [],
+    "mcpServers": []
+  },
+  {
+    "id": "github",
+    "name": ".github",
+    "group": "⚙️ Meta",
+    "status": "Active",
+    "techStack": "YAML / Markdown",
+    "deployUrl": "",
+    "description": "Organization-wide configs, CI templates, and agent rules.",
+    "knownIssues": [],
+    "roadmap": [],
+    "mcpServers": []
+  },
+  {
+    "id": "recipeos",
+    "name": "RecipeOS",
+    "group": "🍽️ Culinary",
+    "status": "Archived",
+    "techStack": "React, Express, MongoDB",
+    "deployUrl": "",
+    "description": "Archived recipe catalog project.",
+    "knownIssues": [],
+    "roadmap": [],
+    "mcpServers": []
+  },
+  {
+    "id": "restrevive-ai",
+    "name": "RestRevive-AI",
+    "group": "🍽️ Culinary",
+    "status": "Archived",
+    "techStack": "Python, Flask, OpenAI API",
+    "deployUrl": "",
+    "description": "Archived AI restaurant revitalization assistant.",
+    "knownIssues": [],
+    "roadmap": [],
+    "mcpServers": []
+  }
+]
