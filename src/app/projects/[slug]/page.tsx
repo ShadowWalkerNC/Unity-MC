@@ -1,13 +1,21 @@
 "use client";
 
-import React, { useState, use } from "react";
+import React, { useState, useEffect, use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import projectsData from "../../../data/projects.json";
-import { updateProject, runWorkspaceTest } from "../../actions";
+import { updateProject, runWorkspaceTest, getLiveGitHubRepoStats } from "../../actions";
 
 interface ProjectDetailsPageProps {
   params: Promise<{ slug: string }>;
+}
+
+interface GitHubStats {
+  stars: number;
+  openIssues: number;
+  pushedAt: string;
+  defaultBranch: string;
+  archived: boolean;
 }
 
 export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
@@ -26,6 +34,19 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
   const [testing, setTesting] = useState(false);
   const [testOutput, setTestOutput] = useState<string | null>(null);
   const [message, setMessage] = useState("");
+
+  const [liveStats, setLiveStats] = useState<GitHubStats | null>(null);
+  const [statsLoading, setStatsLoading] = useState(true);
+
+  useEffect(() => {
+    if (project) {
+      setStatsLoading(true);
+      getLiveGitHubRepoStats(project.name).then((data) => {
+        setLiveStats(data);
+        setStatsLoading(false);
+      });
+    }
+  }, [project]);
 
   if (!project) {
     return (
@@ -103,6 +124,31 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 <span style={{ display: "block", fontSize: "0.8rem", color: "var(--muted)" }}>Active Stack</span>
                 <code>{project.techStack}</code>
               </div>
+            </div>
+
+            {/* Live GitHub Data Panel */}
+            <div style={{ marginTop: "1.5rem", paddingTop: "1rem", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+              <h4 style={{ fontSize: "0.9rem", color: "var(--muted)", marginBottom: "0.5rem" }}>🌐 Live GitHub API Sync</h4>
+              {statsLoading ? (
+                <p style={{ fontSize: "0.85rem", color: "var(--muted)" }}>Fetching live repository telemetry...</p>
+              ) : liveStats ? (
+                <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", fontSize: "0.85rem" }}>
+                  <div>
+                    <span style={{ color: "var(--muted)" }}>GitHub Stars:</span> <strong>{liveStats.stars}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--muted)" }}>Open GitHub Issues:</span> <strong>{liveStats.openIssues}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--muted)" }}>Default Branch:</span> <code>{liveStats.defaultBranch}</code>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--muted)" }}>Last Commit Push:</span> <strong>{new Date(liveStats.pushedAt).toLocaleDateString()}</strong>
+                  </div>
+                </div>
+              ) : (
+                <p style={{ fontSize: "0.85rem", color: "var(--muted)" }}>Live repository stats unavailable (or private repository).</p>
+              )}
             </div>
 
             {/* Test Execution Controls */}

@@ -110,3 +110,26 @@ export async function runWorkspaceTest(appName: string) {
     return { success: false, output: errMsg };
   }
 }
+
+export async function getLiveGitHubRepoStats(repoName: string) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/ShadowWalkerNC/${repoName}`, {
+      headers: {
+        "User-Agent": "Unity-MC-Hub"
+      },
+      next: { revalidate: 60 } // Revalidate live data every 60 seconds
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return {
+      stars: data.stargazers_count as number,
+      openIssues: data.open_issues_count as number,
+      pushedAt: data.pushed_at as string,
+      defaultBranch: data.default_branch as string,
+      archived: data.archived as boolean
+    };
+  } catch (err) {
+    console.error("Error fetching live GitHub stats: ", err);
+    return null;
+  }
+}
