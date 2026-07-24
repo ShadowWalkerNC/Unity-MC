@@ -1,0 +1,7 @@
+{
+  "name": "@unity-mc/db",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.ts",
+  "description": "Shared database schemas, Supabase client configurations, and TypeScript models for Unity-MC"
+}

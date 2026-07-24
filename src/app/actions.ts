@@ -2,6 +2,10 @@
 
 import fs from "fs/promises";
 import path from "path";
+import { exec } from "child_process";
+import { promisify } from "util";
+
+const execAsync = promisify(exec);
 
 const PROJECTS_PATH = path.join(
   process.cwd(),
@@ -90,5 +94,19 @@ export async function updateProject(id: string, formData: {
     const errMsg = error instanceof Error ? error.message : "Unknown error";
     console.error("Error updating project data: ", error);
     return { success: false, error: errMsg };
+  }
+}
+
+export async function runWorkspaceTest(appName: string) {
+  try {
+    const command = `npm run test --workspace=@apps/${appName} --if-present`;
+    const { stdout, stderr } = await execAsync(command, { cwd: process.cwd() });
+    return {
+      success: true,
+      output: stdout || stderr || `Test passed for @apps/${appName}`
+    };
+  } catch (error) {
+    const errMsg = error instanceof Error ? error.message : "Test failed";
+    return { success: false, output: errMsg };
   }
 }

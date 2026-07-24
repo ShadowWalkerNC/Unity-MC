@@ -4,7 +4,7 @@ import React, { useState, use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import projectsData from "../../../data/projects.json";
-import { updateProject } from "../../actions";
+import { updateProject, runWorkspaceTest } from "../../actions";
 
 interface ProjectDetailsPageProps {
   params: Promise<{ slug: string }>;
@@ -23,6 +23,8 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
   const [newRoadmap, setNewRoadmap] = useState("");
   const [changelogMessage, setChangelogMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [testing, setTesting] = useState(false);
+  const [testOutput, setTestOutput] = useState<string | null>(null);
   const [message, setMessage] = useState("");
 
   if (!project) {
@@ -53,11 +55,18 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
       setNewIssue("");
       setNewRoadmap("");
       setChangelogMessage("");
-      // Refresh router state to fetch new json values
       router.refresh();
     } else {
       setMessage(`Error: ${res.error}`);
     }
+  };
+
+  const handleRunTest = async () => {
+    setTesting(true);
+    setTestOutput(null);
+    const res = await runWorkspaceTest(project.id);
+    setTesting(false);
+    setTestOutput(res.output);
   };
 
   return (
@@ -75,9 +84,9 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
             <h1 style={{ fontSize: "2.25rem", margin: "0.25rem 0 1rem 0" }} className="title-gradient">
               {project.name}
             </h1>
-            <p style={{ color: "#fff", fontSize: "1.1rem", marginBottom: "1.5rem" }}>{project.description}</p>
+            <p style={{ color: "#111", fontSize: "1.1rem", marginBottom: "1.5rem" }}>{project.description}</p>
             
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: "1.5rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: "1.5rem" }}>
               <div>
                 <span style={{ display: "block", fontSize: "0.8rem", color: "var(--muted)" }}>Status</span>
                 <span style={{ fontWeight: 600 }}>{project.status}</span>
@@ -94,6 +103,19 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 <span style={{ display: "block", fontSize: "0.8rem", color: "var(--muted)" }}>Active Stack</span>
                 <code>{project.techStack}</code>
               </div>
+            </div>
+
+            {/* Test Execution Controls */}
+            <div style={{ marginTop: "1.5rem", paddingTop: "1rem", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+              <button onClick={handleRunTest} disabled={testing} className="btn btn-secondary" style={{ fontSize: "0.85rem", gap: "0.5rem" }}>
+                🧪 {testing ? "Running Workspace Test..." : `Run Test Suite (@apps/${project.id})`}
+              </button>
+              {testOutput && (
+                <div style={{ marginTop: "1rem", padding: "0.75rem", background: "rgba(0,0,0,0.03)", borderRadius: "8px", fontSize: "0.8rem", border: "1px solid rgba(0,0,0,0.08)" }}>
+                  <span style={{ fontWeight: 600, display: "block", marginBottom: "0.25rem" }}>Test Output:</span>
+                  <pre style={{ whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{testOutput}</pre>
+                </div>
+              )}
             </div>
           </section>
 
@@ -132,7 +154,7 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
               <h3 style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>🔌 Active MCP Bridges</h3>
               <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
                 {project.mcpServers.map((server) => (
-                  <code key={server} style={{ background: "rgba(255,255,255,0.05)", padding: "0.25rem 0.5rem", borderRadius: "4px", fontSize: "0.8rem", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <code key={server} style={{ background: "rgba(0,0,0,0.03)", padding: "0.25rem 0.5rem", borderRadius: "4px", fontSize: "0.8rem", border: "1px solid rgba(0,0,0,0.08)" }}>
                     {server}
                   </code>
                 ))}
@@ -143,7 +165,7 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
 
         {/* Update Form Sidebar */}
         <section className="glass-panel" style={{ padding: "1.5rem", borderRadius: "16px" }}>
-          <h3 style={{ fontSize: "1.2rem", borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "0.5rem", marginBottom: "1rem" }}>
+          <h3 style={{ fontSize: "1.2rem", borderBottom: "1px solid rgba(0,0,0,0.08)", paddingBottom: "0.5rem", marginBottom: "1rem" }}>
             Log Change & Update
           </h3>
 
@@ -156,17 +178,17 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 onChange={(e) => setStatus(e.target.value)}
                 style={{
                   width: "100%",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  background: "rgba(0,0,0,0.03)",
+                  border: "1px solid rgba(0,0,0,0.08)",
                   padding: "0.6rem 0.8rem",
                   borderRadius: "6px",
-                  color: "#fff",
+                  color: "inherit",
                   fontFamily: "inherit"
                 }}
               >
-                <option value="Active" style={{ background: "var(--surface)" }}>Active</option>
-                <option value="Active (private)" style={{ background: "var(--surface)" }}>Active (Private)</option>
-                <option value="Archived" style={{ background: "var(--surface)" }}>Archived</option>
+                <option value="Active">Active</option>
+                <option value="Active (private)">Active (Private)</option>
+                <option value="Archived">Archived</option>
               </select>
             </div>
 
@@ -180,11 +202,11 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 placeholder="https://..."
                 style={{
                   width: "100%",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  background: "rgba(0,0,0,0.03)",
+                  border: "1px solid rgba(0,0,0,0.08)",
                   padding: "0.6rem 0.8rem",
                   borderRadius: "6px",
-                  color: "#fff",
+                  color: "inherit",
                   fontFamily: "inherit"
                 }}
               />
@@ -200,11 +222,11 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 placeholder="e.g. Broken routing on refresh"
                 style={{
                   width: "100%",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  background: "rgba(0,0,0,0.03)",
+                  border: "1px solid rgba(0,0,0,0.08)",
                   padding: "0.6rem 0.8rem",
                   borderRadius: "6px",
-                  color: "#fff",
+                  color: "inherit",
                   fontFamily: "inherit"
                 }}
               />
@@ -220,11 +242,11 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 placeholder="e.g. Integrate Analytics panel"
                 style={{
                   width: "100%",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  background: "rgba(0,0,0,0.03)",
+                  border: "1px solid rgba(0,0,0,0.08)",
                   padding: "0.6rem 0.8rem",
                   borderRadius: "6px",
-                  color: "#fff",
+                  color: "inherit",
                   fontFamily: "inherit"
                 }}
               />
@@ -240,11 +262,11 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 rows={3}
                 style={{
                   width: "100%",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  background: "rgba(0,0,0,0.03)",
+                  border: "1px solid rgba(0,0,0,0.08)",
                   padding: "0.6rem 0.8rem",
                   borderRadius: "6px",
-                  color: "#fff",
+                  color: "inherit",
                   fontFamily: "inherit",
                   resize: "vertical"
                 }}
@@ -262,7 +284,7 @@ export default function ProjectDetails({ params }: ProjectDetailsPageProps) {
                 borderRadius: "6px",
                 textAlign: "center",
                 background: message.includes("success") ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.15)",
-                color: message.includes("success") ? "rgb(52, 211, 153)" : "rgb(248, 113, 113)",
+                color: message.includes("success") ? "rgb(5, 150, 105)" : "rgb(220, 38, 38)",
                 fontSize: "0.85rem"
               }}>
                 {message}
