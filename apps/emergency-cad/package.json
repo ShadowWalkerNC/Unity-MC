@@ -1,8 +1,0 @@
-{
-  "name": "@apps/emergency-cad",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "test": "echo 'Testing Emergency CAD...'"
-  }
-}

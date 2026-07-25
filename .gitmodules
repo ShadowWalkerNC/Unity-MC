@@ -13,3 +13,21 @@
 [submodule "apps/portfolio"]
 	path = apps/portfolio
 	url = https://github.com/ShadowWalkerNC/Portfolio.git
+[submodule "apps/culinaryos"]
+	path = apps/culinaryos
+	url = https://github.com/ShadowWalkerNC/CulinaryOS.git
+[submodule "apps/plated"]
+	path = apps/plated
+	url = https://github.com/ShadowWalkerNC/Plated.git
+[submodule "apps/kitchenkit"]
+	path = apps/kitchenkit
+	url = https://github.com/ShadowWalkerNC/KitchenKit.git
+[submodule "apps/emergency-cad"]
+	path = apps/emergency-cad
+	url = https://github.com/ShadowWalkerNC/Emergency-CAD.git
+[submodule "apps/mercury"]
+	path = apps/mercury
+	url = https://github.com/ShadowWalkerNC/Mercury.git
+[submodule "apps/post-pilot"]
+	path = apps/post-pilot
+	url = https://github.com/ShadowWalkerNC/Post-Pilot.git
