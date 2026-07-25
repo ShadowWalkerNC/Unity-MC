@@ -1,0 +1,15 @@
+[submodule "apps/culinaryops"]
+	path = apps/culinaryops
+	url = https://github.com/ShadowWalkerNC/CulinaryOps.git
+[submodule "apps/shorelineops"]
+	path = apps/shorelineops
+	url = https://github.com/ShadowWalkerNC/ShorelineOps.git
+[submodule "apps/bibledesk"]
+	path = apps/bibledesk
+	url = https://github.com/ShadowWalkerNC/BibleDesk.git
+[submodule "apps/prayer-atlas"]
+	path = apps/prayer-atlas
+	url = https://github.com/ShadowWalkerNC/Prayer-Atlas.git
+[submodule "apps/portfolio"]
+	path = apps/portfolio
+	url = https://github.com/ShadowWalkerNC/Portfolio.git
